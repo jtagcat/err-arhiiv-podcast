@@ -13,7 +13,7 @@ import (
 
 	"github.com/eduncan911/podcast"
 	cs "github.com/jtagcat/composedscrape"
-	"github.com/jtagcat/util"
+	"github.com/jtagcat/util/std"
 )
 
 func main() {
@@ -85,11 +85,11 @@ func main() {
 				panic(err)
 			}
 
-			_, filename, ok := util.RevCut(strings.TrimSuffix(m3u8, "/master.m3u8"), "/")
+			_, filename, ok := std.RevCut(strings.TrimSuffix(m3u8, "/master.m3u8"), "/")
 			if !ok {
 				panic("no slash in m3u8 url")
 			}
-			filename, _, ok = util.RevCut(filename, ".") // no file ext
+			filename, _, ok = std.RevCut(filename, ".") // no file ext
 			if !ok {
 				panic("no slash in m3u8 url")
 			}
