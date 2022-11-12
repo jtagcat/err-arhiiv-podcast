@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/eduncan911/podcast"
-	cs "github.com/jtagcat/composedscrape"
+	"github.com/jtagcat/util/scrape"
 	"github.com/jtagcat/util/std"
 )
 
@@ -23,7 +23,7 @@ func main() {
 	startlink := os.Args[3]    // https://arhiiv.err.ee/seeria/tahelaev/0/0/default/koik
 	name := os.Args[4]
 
-	sc := cs.InitScraper(ctx, &cs.Scraper{
+	sc := scrape.InitScraper(ctx, &scrape.Scraper{
 		InitGlobalConcurrentLimit: 3,
 	})
 
@@ -35,7 +35,7 @@ func main() {
 	pod := podcast.New(doc.Find("h1").Text(), startlink, "", nil, nil)
 	pod.AddCategory("History", nil)
 
-	for _, listing := range cs.RawEach(doc.Find(".content")) {
+	for _, listing := range scrape.RawEach(doc.Find(".content")) {
 		listing := listing
 		func() {
 			var item podcast.Item
@@ -44,7 +44,7 @@ func main() {
 			if !ok {
 				panic(listing)
 			}
-			link, err = cs.URLJoin(startlink, link)
+			link, err = std.URLJoin(startlink, link)
 			if err != nil {
 				panic(err)
 			}
@@ -80,7 +80,7 @@ func main() {
 			if !ok {
 				panic("no termination after m3u8")
 			}
-			m3u8, err = cs.URLJoin(startlink, m3u8)
+			m3u8, err = std.URLJoin(startlink, m3u8)
 			if err != nil {
 				panic(err)
 			}
@@ -107,7 +107,7 @@ func main() {
 				panic(err)
 			}
 
-			reachURL, err := cs.URLJoin(reachableDir, name, filename)
+			reachURL, err := std.URLJoin(reachableDir, name, filename)
 			if err != nil {
 				panic(err)
 			}

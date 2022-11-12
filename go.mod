@@ -4,8 +4,7 @@ go 1.19
 
 require (
 	github.com/eduncan911/podcast v1.4.2
-	github.com/jtagcat/composedscrape v0.0.0-20221029193459-1b3b5186aba7
-	github.com/jtagcat/util v0.0.0-20221112215320-924d264211be
+	github.com/jtagcat/util v0.0.0-20221112223935-c0d8b35c7b3e
 )
 
 require (
